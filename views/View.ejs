@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+
+    <% if( responseArray.length> 0){ %>
+        <% responseArray.forEach((results)=>{ %>
+            <div class="employee-card">
+                <div class="main-container">
+                    <div class="employee-details">
+                        <div>
+                            <img class="profile"
+                                src="https://www.bing.com/images/search?view=detailV2&ccid=oJiCZZQy&id=954E0960F0E378C12DBCD46581BAE263E055C5AB&thid=OIP.oJiCZZQyKjj1EZHGbQUUhwHaFj&mediaurl=https%3a%2f%2fcdnassets.hw.net%2f42%2fd1%2f9b178efd4166a4e3ebfb47d32ef1%2ffemale-construction-worker.jpg&cdnurl=https%3a%2f%2fth.bing.com%2fth%2fid%2fR.a098826594322a38f51191c66d051487%3frik%3dq8VV4GPiuoFl1A%26pid%3dImgRaw%26r%3d0&exph=1500&expw=2000&q=workers&simid=608015297763614753&FORM=IRPRST&ck=11ABC562D3AAD404AC39EAB849CA42F6&selectedIndex=23"
+                                alt="profile">
+                        </div>
+                        <h2></h2>
+                        <div class="Employee-info">
+                            <p><%=results.name%></p>
+                            <p><%=results.idNumber%></p>
+                            <p><%=results.email%></p>
+                            <p><%=results.employeePosition%></p>
+                            <p><%=results.phoneNumber%></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <% }) %>
+        <% }else{ %>
+
+            <h2>No employees yet !</h2>
+      <%  } %>
+
+
+</body>
+
+</html>

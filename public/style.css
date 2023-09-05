@@ -1,0 +1,182 @@
+*{
+    margin: 0;
+    padding: 0;
+   font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  }
+  
+  .wrapper{
+    display: flex;  
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  h1{
+    margin-top: 30px;
+    text-align: center;
+    color: tomato;
+  }
+  
+  .form-group{
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    margin: 30px;
+    background-color: '#000000';
+  
+  }
+  
+  .wrapper p{
+    text-align: center;
+    margin-top: 7px;
+    font-weight: bold;
+  }
+  
+  .main{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 1024px;
+    margin-top: 20px;
+    align-items: center; 
+    height: auto;
+  
+  }
+
+  
+  .form-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 600px;
+    height: auto;
+    background-color: #e4e4e4;
+    margin: 8px 0;
+    border-radius: 6px;
+    padding: 12 px 20px; 
+    box-sizing: border-box;  
+  }
+  .form-control{
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  .view-container{
+    width: 600px;    
+    background-color: #e4e4e4;
+    margin: 20px 50px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+  }
+
+/* for view */
+
+.main-container{
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+
+    display: grid;
+    grid-template-columns:1fr 1fr ;
+    grid-gap: 3%;
+    padding:3%;
+    padding-bottom: 5% ;
+
+}
+.employee-card{
+   
+    width: 400px;
+    height: 200px;
+
+    margin-left: auto;
+    margin-right:auto ;
+    
+    padding: 2%;
+    border: 1px solid;
+
+}
+.Employee-details{
+    width: 40px;
+    display: flex;
+    padding:2% ;
+}
+.Employee-info{
+width: 40px;
+height: 40px;
+border: 5%;
+font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+}
+
+/* pop up form */
+
+.popup{
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top:0;
+  width:100%;
+  height:100% ;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.7);
+
+}
+.popup-content{
+  background-color: #ccc;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid rgb(136, 118, 90);
+  width:30%;
+  box-shadow: -1px 5px 14px 0px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: -1 5px 14px 0px  rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: -1px 5px 14px 0px  rgba(0, 0, 0, 0.1);
+}
+.popup-content form {
+  padding: 1%;
+  width:80%;
+  margin: 2%;
+  align-content: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+.popup-content h2{
+  text-align: center;
+
+}
+.popup-content form input{
+  padding: 1%;
+  width: 80%;
+  outline: none;
+  margin: 2%;
+  align-content: center;
+}
+.popup-content form button{
+  width: 80%;
+  padding:2%;
+  background-color: black;
+  color: #e4e4e4;
+  margin-right: 10px;
+}
+.popup-close{
+  color: gray;
+  float: right;
+  font-size:28px ;
+  font-weight: bold;
+}
+.popup-close,.popup-close:focus{
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+.form-control1{
+  display: none;
+}
+

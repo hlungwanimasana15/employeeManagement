@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>form</title>
+  <link rel="stylesheet" type="text/css" href="/style.css">
+</head>
+
+<body>
+
+  <div class="wrapper">
+    <h1>Employee Management</h1>
+    <p>please enter details</p>
+    <div class='main'>
+
+      <div class='form-container'>
+        <form class='form-group' action="/form" method="POST" enctype="multipart/form-data">
+
+          <label>Name & Surname</label>
+          <input type="text" class='form-control' id="name" name="name" required />
+          <br></br>
+          <label>ID Number</label>
+          <input type="text" class='form-control' id="idNumber" name="idNumber" required />
+          <br></br>
+          <label>Email Address</label>
+          <input type="text" class='form-control' id="email" name="email" required />
+          <br></br>
+          <label>Employee Position</label>
+          <input type="text" class='form-control' id="employeePosition" name="employeePosition" required />
+          <br></br>
+          <label>Phone Number</label>
+          <input type="text" class='form-control' id="phoneNumber" name="phoneNumber" required />
+          <br></br>
+          
+          <input type="text" class='form-control1' id="id" name="id" />
+          
+          <label>Image</label>
+          <input type="file" id='image' name="image" class='form-control'></input>
+          <br></br>
+          <button type="submit" class='btn-add' id="post-button">Add employee</button>
+          <br></br>
+        </form>
+      </div>
+      <div class='view-container'>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Name & Surname</th>
+              <th>ID Number</th>
+              <th>Email Address</th>
+              <th>Employee Position</th>
+              <th>Phone Number</th>
+              <th>Image</th>
+
+            </tr>
+            <% if(responseArray.length> 0 ){ %>
+              <% responseArray.forEach((results)=>{ %>
+                <tr>
+                  <td class="sub">
+                    <%=results.name %>
+                  </td>
+                  <td class="sub">
+                    <%=results.idNumber %>
+                  </td>
+                  <td class="sub">
+                    <%=results.email %>
+                  </td>
+                  <td class="sub">
+                    <%=results.employeePosition %>
+                  </td>
+                  <td class="sub">
+                    <%=results.phoneNumber %>
+                  </td>
+                  <td>
+                    <a onclick="showPopup(<%=JSON.stringify(results)%>)"><button class='btn-update'
+                        type='button'>Update</button></a>
+                    <a onclick="deleteFunction(<%=JSON.stringify(results)%>)" data-doc=<%=results.id%><button
+                        class='btn-clear'>Remove</button></a>
+
+                  </td>
+                </tr>
+
+                <% })%>
+                  <% } %>
+
+
+          </thead>
+          <tbody>
+
+          </tbody>
+        </table>
+
+
+
+      </div>
+    </div>
+  </div>
+
+  <!-- pop up update -->
+  <div id="popup-form" class="popup">
+    <div class="popup-content">
+      <span class="popup-close" onclick="hidePopup()">&times;</span>
+      <h2>
+        update your details
+      </h2>
+      <form id="update-form" method="PUT">
+        <label>Name & Surname</label>
+        <input type="text" class='form-control' id="addName" name="name" required />
+        <br></br>
+        <label>ID Number</label>
+        <input type="text" class='form-control' id="addIdNumber" name="idNumber" required />
+        <br></br>
+        <label>Email Address</label>
+        <input type="text" class='form-control' id="addEmail" name="email" required />
+        <br></br>
+        <label>Employee Position</label>
+        <input type="text" class='form-control' id="addEmployeePosition" name="employeePosition" required />
+        <br></br>
+        <label>Phone Number</label>
+        <input type="text" class='form-control' id="addPhoneNumber" name="phoneNumber" required />
+        <br></br>
+        <label>Image</label>
+        <input type="file" class='form-control'></input>
+        <br></br>
+        <button onclick="handleUpdate()"  class='btn-add' id="update-button" data-id ="">Save changes</button>
+        <br></br>
+      </form>
+
+    </div>
+  </div>
+
+
+  <script>
+
+    function deleteFunction(results) {
+      console.log(results);
+      const endpoint = `delete/${results.id}`
+      fetch(endpoint, {
+        method: 'DELETE',
+      }).then(() => {
+        console.log('deleted')
+      }).catch((error) => {
+        console.log(error)
+      })
+    }
+
+
+
+    function showPopup(res) {
+
+      console.log(res);
+      console.log(res.name);
+      alert(res.idNumber);
+      document.getElementById('popup-form').style.display = 'block'
+
+      document.getElementById('addName').value = res.name
+      document.getElementById('addIdNumber').value = res.idNumber
+      document.getElementById('addEmail').value = res.email
+      document.getElementById('addEmployeePosition').value = res.employeePosition
+      document.getElementById('addPhoneNumber').value = res.phoneNumber
+      document.getElementById('id').value = res.id
+
+
+      document.getElementById('update-button').setAttribute('data-id', res.id);
+    }
+     function handleUpdate ( ) {
+      // document.getElementById('update-button').addEventListener('submit', (e) => {
+      //   e.preventDefault();
+
+        const name = document.getElementById('addName').value
+        const idNumber = document.getElementById('addIdNumber').value
+        const email = document.getElementById('addEmail').value
+        const employeePosition = document.getElementById('employeePosition').value
+        const phoneNumber = document.getElementById('addPhoneNumber').value
+        const id =  document.getElementById('id').value
+
+        const data = { name, idNumber, email, employeePosition, phoneNumber }
+     
+       console.log();
+        const endpoint = `update/${id}`
+        fetch(endpoint, {
+          method: 'PUT',
+          headers: { 'Content-type': 'application/json' },
+          body: JSON.stringify(data
+          )
+        }).then(response => response.json())
+          .then((data) => {
+            console.log('done', data);
+          }).catch((error) => {
+            console.log(error);
+          })
+      
+    }
+
+    function hidePopup() {
+      document.getElementById('popup-form').style.display = 'none';
+    }
+
+
+  </script>
+</body>
+
+</html>

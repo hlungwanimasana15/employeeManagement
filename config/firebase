@@ -1,0 +1,15 @@
+
+var admin = require("firebase-admin");
+
+var serviceAccount = require("./Key.json");
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+
+  databaseURL:"https://employee-management-8ebeb.firebaseio.com",
+});
+
+const db = admin.firebase();
+const storage = admin.storage();
+ module.exports ={ db , storage}
+
