@@ -57,39 +57,41 @@ app.post('/form',upload.single('image'), async (req, res) => {
 
         const bucket = admin.storage().bucket()
         const file = bucket.file(req.file.originalname)
-        const result = await file.createReadStream().end(req.file.buffer)
+        const result =  file.createWriteStream().end(req.file.buffer)
         const downloadUrl = await file.getSignedUrl({
             action:'read',
             expires : '21-12-2025'
   
         })
-        console.log(result);
+        console.log('line 66',downloadUrl);
 
-        // const imgJson ={
-        //     imageUrl: downloadUrl[0]
-        // }
-        // const employeeJson = {
-        //     name: req.body.name,
-        //     idNumber: req.body.idNumber,
-        //     email: req.body.email,
-        //     employeePosition: req.body.employeePosition,
-        //     phoneNumber: req.body.phoneNumber,
-        //     image: downloadUrl[0]
+        const imgJson ={
+            imageUrl: downloadUrl[0]
+        }
+        const employeeJson = {
+            name: req.body.name,
+            idNumber: req.body.idNumber,
+            email: req.body.email,
+            employeePosition: req.body.employeePosition,
+            phoneNumber: req.body.phoneNumber,
+            // image: downloadUrl[0]
 
-        // }
+        }
+        
         // console.log(employeeJson)
-        // // console.log(raq.params);
-        // // console.log(req.body)
-        // // console.log(req.query);
-        // const response = await db.collection('employees').add(employeeJson)
-        // .then((data) => {
-        //    console.log(data)
-        //     res.redirect('/form')
-        //     console.log('added')
-        // }).catch((error) => {
-        //         console.log(error);
-        // })
-        // res.send(response)
+        // console.log(req.params);
+        // console.log(req.body)
+        // console.log(req.query); 
+        console.log('try adding')
+        const response = await db.collection('employees').add(employeeJson)
+        .then((data) => {
+           console.log('before redirect')
+            res.redirect('/form')
+            console.log('added')
+        }).catch((error) => {
+                console.log(error);
+        })
+        res.send(response)
     } catch (error) {
         console.log('imageErr');
         res.send(error)
